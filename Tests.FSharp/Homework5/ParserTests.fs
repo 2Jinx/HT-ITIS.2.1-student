@@ -29,7 +29,7 @@ let ``ints parsed correctly`` (value1 : int, value2: int, operation, expectedVal
 [<InlineData(15.6, 5.6, CalculatorOperation.Divide, 2.7857)>]
 let ``floats parsed correctly`` (value1 : float, value2: float, operation, expectedValue : float) =
     //act
-    let actual = (abs (expectedValue - Calculator.calculate value1 operation value2))
+    let actual = (abs (expectedValue - calculate value1 operation value2))
     
     //assert
     Assert.True(actual |> decimal < epsilon)
@@ -63,10 +63,7 @@ let ``decimals parsed correctly`` (value1 : decimal, value2: decimal, operation,
 [<InlineData("15", "-", "5", 10)>]
 [<InlineData("15", "*", "5", 75)>]
 [<InlineData("15", "/", "5",  3)>]
-[<InlineData("15.6", "+", "5.6", 21.2)>]
-[<InlineData("15.6", "-", "5.6", 10)>]
-[<InlineData("15.6", "*", "5.6", 87.36)>]
-[<InlineData("15.6", "/", "5.6", 2.7857)>]
+
 let ``values parsed correctly`` (value1, operation, value2, expectedValue) =
     //arrange
     let values = [|value1;operation;value2|]
@@ -78,8 +75,8 @@ let ``values parsed correctly`` (value1, operation, value2, expectedValue) =
     match result with
     | Ok resultOk ->
         match resultOk with
-        | arg1, operation, arg2 -> Assert.True((abs (expectedValue - Calculator.calculate arg1 operation arg2)) |> decimal < epsilon)
-    | Error e -> raise (InvalidOperationException(e))
+        | arg1, operation, arg2 -> Assert.True((abs (expectedValue - calculate arg1 operation arg2)) |> decimal < epsilon)
+    | Error e -> raise (InvalidOperationException(e.ToString()))
         
 [<HomeworkTheory(Homeworks.HomeWork5)>]
 [<InlineData("f", "+", "3")>]

@@ -8,18 +8,24 @@ type CalculatorOperation =
      | Multiply = 2
      | Divide = 3
 
-[<Literal>] 
-let plus = "+"
 
 [<Literal>] 
-let minus = "-"
+let Plus = "+"
 
 [<Literal>] 
-let multiply = "*"
+let Minus = "-"
 
 [<Literal>] 
-let divide = "/"
+let Multiply = "*"
+
+[<Literal>] 
+let Divide = "/"
 
 [<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 let inline calculate value1 operation value2: 'a =
-    (NotImplementedException() |> raise)
+     match operation with
+     | CalculatorOperation.Divide -> value1 / value2
+     | CalculatorOperation.Multiply -> value1 * value2
+     | CalculatorOperation.Minus -> value1 - value2
+     | CalculatorOperation.Plus -> value1 + value2
+     | _ -> raise (InvalidOperationException("Invalid Operation!"))
