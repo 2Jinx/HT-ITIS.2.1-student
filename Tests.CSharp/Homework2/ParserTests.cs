@@ -12,7 +12,9 @@ public class ParserTests
     [InlineData("/", CalculatorOperation.Divide)]
     public void TestCorrectOperations(string operation, CalculatorOperation operationExpected)
     {
-        throw new NotImplementedException();
+        var parsedOperation = Parser.ParseOperation(operation);
+        
+        Assert.Equal(operationExpected, parsedOperation);
     }
 
     [HomeworkTheory(Homeworks.HomeWork2)]
@@ -21,18 +23,24 @@ public class ParserTests
     [InlineData("a", "+", "f")]
     public void TestParserWrongValues(string val1, string operation, string val2)
     {
-        throw new NotImplementedException();
+        var args = new[] { val1, operation, val2 };
+
+        Assert.Throws<ArgumentException>(() => Parser.ParseCalcArguments(args, out _, out _, out _));
     }
 
     [Homework(Homeworks.HomeWork2)]
     public void TestParserWrongOperation()
     {
-        throw new NotImplementedException();
+        string[] args = new [] {"27", ":", "9" };
+        
+        Assert.Throws<InvalidOperationException>(() => Parser.ParseCalcArguments(args, out _, out _, out _));
     }
 
     [Homework(Homeworks.HomeWork2)]
     public void TestParserWrongLength()
     {
-        throw new NotImplementedException();
+        string[] args = new []{"15", "+", "8", "-", "4" };
+        
+        Assert.Throws<ArgumentException>(() => Parser.ParseCalcArguments(args, out _, out _, out _));
     }
 }
