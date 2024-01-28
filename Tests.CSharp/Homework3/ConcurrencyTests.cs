@@ -64,19 +64,12 @@ public class ConcurrencyTests
     [Homework(Homeworks.HomeWork3)]
     public void EightThreads_100KIterations_InterlockedIsFasterThanLock_Or_IsIt()
     {
-        var isM1Mac = OperatingSystem.IsMacOS() &&
-                      RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
-
         var elapsedWithLock = StopWatcher.Stopwatch(EightThreads_100KIterations_WithLock_NoRaces);
         var elapsedWithInterlocked = StopWatcher.Stopwatch(EightThreads_100KIterations_WithInterlocked_NoRaces);
 
         _toh.WriteLine($"Lock: {elapsedWithLock}; Interlocked: {elapsedWithInterlocked}");
 
-        // see: https://godbolt.org/z/1TzWMz4aj
-        if (isM1Mac)
-            Assert.True(elapsedWithLock < elapsedWithInterlocked);
-        else
-            Assert.True(elapsedWithLock > elapsedWithInterlocked);
+        Assert.True(elapsedWithLock > elapsedWithInterlocked);
     }
 
     public void Semaphore()
