@@ -21,5 +21,6 @@ let inline calculate (value1: double, operation , value2: double) =
                     Error "Error! Dividing by zero!"
                else
                     Ok $"{value1 / value2}"
+          | _ -> Error "Undefined operation!"
 
     

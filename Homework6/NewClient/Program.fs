@@ -24,7 +24,7 @@ let main args =
     let operation = convertOperation args[1]
     let client = new HttpClient()
     if args.Length = 3 then
-        let url = $"http://localhost:64505/calculate?value1={args[0]}&operation={operation}&value2={args[2]}"
+        let url = $"http://localhost:42732/calculate?value1={args[0]}&operation={operation}&value2={args[2]}"
         let result = Async.RunSynchronously(sendRequestAsync(client, url))
         printfn $"Result: {result}"
     else

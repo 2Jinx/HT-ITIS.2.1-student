@@ -6,17 +6,15 @@ open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
-open Hw6.Parser
-open Hw6.Calculator
 
 let doCalculations (urlArgs: string[]) =
-    let value1 = parseStringToDouble urlArgs.[0]
-    let operation = parseOperation urlArgs.[1]
-    let value2 = parseStringToDouble urlArgs.[2]
+    let value1 = Parser.parseStringToDouble urlArgs.[0]
+    let operation = Parser.parseOperation urlArgs.[1]
+    let value2 = Parser.parseStringToDouble urlArgs.[2]
     match value1 with
     | Ok val1 ->
         match value2 with
-        | Ok val2 -> calculate (val1, operation, val2)
+        | Ok val2 -> Calculator.calculate (val1, operation, val2)
         | Error message -> Error message
     | Error message -> Error message
     
