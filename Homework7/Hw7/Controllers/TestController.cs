@@ -1,20 +1,19 @@
-﻿using Hw7.Models;
+using Hw7.Models.ForTests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hw7.Controllers;
 
-public class HomeController : Controller
+public class TestController : Controller
 {
     [HttpGet]
-    public IActionResult UserProfile()
+    public IActionResult TestModel()
     {
         return View();
     }
 
     [HttpPost]
-    public IActionResult UserProfile(UserProfile profile)
+    public IActionResult TestModel(TestModel profile)
     {
         return View(profile);
     }
-
 }

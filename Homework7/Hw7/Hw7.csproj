@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'Homework7' " />
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Test\TestModel.cshtml" />
     </ItemGroup>

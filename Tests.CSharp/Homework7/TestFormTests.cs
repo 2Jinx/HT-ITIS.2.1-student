@@ -3,6 +3,8 @@ using Hw7.Models.ForTests;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Tests.CSharp.Homework7.Shared;
 using Tests.RunLogic.Attributes;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Tests.CSharp.Homework7;
 
@@ -44,7 +46,7 @@ public class TestFormTests : IClassFixture<WebApplicationFactory<Hw7.Program>>
         //arrange
         var model = new BaseModel();
         var response = await TestHelper.SendForm(_client, _url, model);
-
+        
         //act
         var actual = TestHelper.GetValidationMessageFromSpan(response, propertyName);
 
@@ -68,7 +70,7 @@ public class TestFormTests : IClassFixture<WebApplicationFactory<Hw7.Program>>
         //act
         var actual = TestHelper.GetValidationMessageFromSpan(response, propertyName);
 
-        //assert";
+        //assert
         Assert.Equal(expected, actual);
     }
 }
