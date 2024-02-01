@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using Hw8.Calculator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +11,15 @@ public class CalculatorController : Controller
         string operation,
         string val2)
     {
-        throw new NotImplementedException();
+        try
+        {
+            CalculatorArgs args = Parser.ParseCalculatorArgs(val1, operation, val2);
+            return Ok(calculator.Calculate(args));
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
     
     [ExcludeFromCodeCoverage]
